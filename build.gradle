@@ -1,16 +1,13 @@
 plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
     id 'java'
-    id 'org.springframework.boot' version '3.3.0'
-    id 'io.spring.dependency-management' version '1.1.5'
     id 'groovy'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-
-java {
-    sourceCompatibility = '17'
-}
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -18,7 +15,7 @@ configurations {
     }
 }
 
-bootJar{
+bootJar {
     archiveFileName = 'app.jar'
 }
 
@@ -34,7 +31,6 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // spock
     testImplementation('org.spockframework:spock-core:2.1-groovy-3.0')
