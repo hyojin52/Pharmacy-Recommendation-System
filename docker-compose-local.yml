@@ -19,5 +19,6 @@ services:
       - MARIADB_ROOT_PASSWORD=${SPRING_DATABASE_PASSWORD}
     volumes:
       - ./database/config:/etc/mysql/conf.d
+      - ./database/init:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
