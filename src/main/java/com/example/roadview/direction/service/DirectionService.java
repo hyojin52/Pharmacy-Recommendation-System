@@ -2,11 +2,14 @@ package com.example.roadview.direction.service;
 
 import com.example.roadview.api.dto.DocumentDto;
 import com.example.roadview.direction.entity.Direction;
+import com.example.roadview.direction.repository.DirectionRepository;
 import com.example.roadview.pharmacy.dto.PharmacyDto;
 import com.example.roadview.pharmacy.service.PharmacySearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,6 +26,14 @@ public class DirectionService {
   private static final double RADIUS_KM = 10.0; // 반경 10km 이내
   
   private final PharmacySearchService pharmacySearchService;
+  
+  private final DirectionRepository directionRepository;
+  
+  @Transactional
+  public List<Direction> saveAll(List<Direction> directionList) {
+    if(CollectionUtils.isEmpty(directionList)) return Collections.emptyList();
+    return directionRepository.saveAll(directionList);
+  }
   
   public List<Direction> buildDirectionList(DocumentDto documentDto) {
     
