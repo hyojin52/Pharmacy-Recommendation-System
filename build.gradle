@@ -30,6 +30,9 @@ dependencies {
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+    // handlebars
+    implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.4'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // spock
@@ -49,6 +52,8 @@ dependencies {
     // mockWebServer
     testImplementation('com.squareup.okhttp3:okhttp:4.10.0')
     testImplementation('com.squareup.okhttp3:mockwebserver:4.10.0')
+
+
 }
 
 tasks.named('test') {
