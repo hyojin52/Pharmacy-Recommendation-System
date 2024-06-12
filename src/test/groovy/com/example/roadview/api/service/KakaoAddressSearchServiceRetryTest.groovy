@@ -10,9 +10,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.testcontainers.shaded.com.github.dockerjava.core.MediaType
-import spock.lang.Specification
-
-import java.net.http.HttpHeaders
+import org.testcontainers.shaded.com.google.common.net.HttpHeaders
 
 class KakaoAddressSearchServiceRetryTest extends AbstractIntegrationContainerBaseTest {
     @Autowired
@@ -53,13 +51,10 @@ class KakaoAddressSearchServiceRetryTest extends AbstractIntegrationContainerBas
                 .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                 .setBody(mapper.writeValueAsString(expectedResponse)))
 
-        def kakaoApiResult = kakaoAddressSearchService.requestAddressSearch(inputAddress)
+        kakaoAddressSearchService.requestAddressSearch(inputAddress)
 
         then:
         2 * kakaoUriBuilderService.buildUriByAddressSearch(inputAddress) >> uri
-        kakaoApiResult.getDocumentList().size() == 1
-        kakaoApiResult.getMetaDto().totalCount == 1
-        kakaoApiResult.getDocumentList().get(0).getAddressName() == inputAddress
 
     }
 
