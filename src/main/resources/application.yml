@@ -36,6 +36,11 @@ spring:
       host: localhost
       port: 6379
 
+pharmacy:
+  recommendation:
+    base:
+      url: http://localhost:8080/dir/
+
 ---
 spring:
   config:

@@ -32,6 +32,13 @@ public class DirectionService {
   
   private final KakaoCategorySearchService kakaoCategorySearchService;
   
+  private final Base62Service base62Service;
+  
+  public Direction findById(String encodedId) {
+    Long decodedId = base62Service.decodeDirectionId(encodedId);
+    return directionRepository.findById(decodedId).orElse(null);
+  }
+  
   // pharmacy search by category kakao api
   public List<Direction> buildDirectionListByCategoryApi(DocumentDto inputDocumentDto) {
     if(Objects.isNull(inputDocumentDto)) return Collections.emptyList();
@@ -59,6 +66,8 @@ public class DirectionService {
     if(CollectionUtils.isEmpty(directionList)) return Collections.emptyList();
     return directionRepository.saveAll(directionList);
   }
+  
+  
   
   public List<Direction> buildDirectionList(DocumentDto documentDto) {
     
